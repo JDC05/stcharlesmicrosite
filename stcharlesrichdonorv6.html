@@ -1,0 +1,1059 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>St Charles Borromeo — For Our Patrons</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300..900;1,9..144,300..900&family=Lora:ital,wght@0,400;0,500;1,400&family=Barlow:wght@300;400&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg:       #F3EFE5;
+    --bg2:      #EAE4D6;
+    --ink:      #1A1714;
+    --ink2:     #3A3530;
+    --red:      #7A1E1E;
+    --red-dim:  rgba(122,30,30,0.12);
+    --muted:    #5C5346;
+    --muted-on-dark: #B7AC97;
+    --text-on-dark: #E9E2D2;
+    --rule:     rgba(26,23,20,0.14);
+    --rule-on-dark: rgba(233,226,210,0.14);
+    --focus:    #1D5FA0;
+    --serif:    'Fraunces', Georgia, serif;
+    --body:     'Lora', Georgia, serif;
+    --sans:     'Barlow', sans-serif;
+  }
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; font-size: 16px; }
+  body {
+    background: var(--bg);
+    color: var(--ink);
+    font-family: var(--body);
+    -webkit-font-smoothing: antialiased;
+    overflow-x: hidden;
+  }
+  a:focus-visible, button:focus-visible, [tabindex]:focus-visible {
+    outline: 3px solid var(--focus);
+    outline-offset: 3px;
+  }
+  .skip-link {
+    position: absolute;
+    left: 1rem; top: -60px;
+    background: var(--ink); color: var(--bg);
+    font-family: var(--sans); font-size: 0.9rem;
+    padding: 0.8rem 1.4rem;
+    z-index: 1000;
+    text-decoration: none;
+    transition: top 0.2s;
+  }
+  .skip-link:focus { top: 1rem; }
+  @media (prefers-reduced-motion: reduce) {
+    html { scroll-behavior: auto; }
+    * { animation: none !important; transition: none !important; }
+  }
+
+  /* ── NAV ── */
+  /* position: sticky (not fixed) keeps the bar pinned to the top reliably
+     across embedded/mobile viewers where "fixed" can detach from the
+     real viewport; scroll-margin-top below stops it covering whatever
+     section a nav link jumps to. */
+  nav {
+    position: sticky; top: 0; left: 0; width: 100%; z-index: 100;
+    background: var(--bg);
+    border-bottom: 1px solid var(--rule);
+    padding: 0.5rem 2.5rem;
+    display: flex; align-items: center; justify-content: space-between;
+    gap: 1rem;
+    min-height: 64px;
+    transition: box-shadow 0.3s;
+  }
+  section[id] { scroll-margin-top: 80px; }
+  nav.scrolled { box-shadow: 0 2px 24px rgba(26,23,20,0.08); }
+  /* Thin bar tracking how far down the page you are — dynamic feedback
+     that doesn't require opening any menu. */
+  .scroll-progress-track {
+    position: absolute; left: 0; right: 0; bottom: -1px; height: 3px;
+  }
+  .scroll-progress-fill {
+    height: 100%; width: 0%; background: var(--red);
+  }
+  /* Live "where am I" label — shown in place of the full link list
+     whenever the nav is collapsed to the hamburger, so scrolling alone
+     shows the section changing instead of needing to open the menu. */
+  .nav-current-section {
+    display: none;
+    font-family: var(--sans); font-size: 0.78rem; font-weight: 600;
+    letter-spacing: 0.14em; text-transform: uppercase;
+    color: var(--red);
+    white-space: nowrap;
+    flex: 1; text-align: center; min-width: 0;
+    overflow: hidden; text-overflow: ellipsis;
+  }
+  .nav-current-section.pulse { animation: navSectionChange 0.4s ease; }
+  @keyframes navSectionChange {
+    from { opacity: 0; transform: translateY(3px); }
+    to { opacity: 1; transform: none; }
+  }
+  .nav-brand {
+    display: flex; align-items: center; gap: 1.2rem;
+    text-decoration: none;
+    flex: none;
+  }
+  .nav-brand-cross {
+    width: 22px; height: 22px; position: relative; flex-shrink: 0;
+  }
+  .nav-brand-cross::before, .nav-brand-cross::after {
+    content: '';
+    position: absolute; background: var(--red);
+  }
+  .nav-brand-cross::before { width: 1.5px; height: 100%; left: 50%; top: 0; transform: translateX(-50%); }
+  .nav-brand-cross::after  { height: 1.5px; width: 100%; top: 35%; left: 0; }
+  .nav-brand-text {
+    font-family: var(--sans); font-size: 0.74rem;
+    letter-spacing: 0.16em; text-transform: uppercase;
+    color: var(--ink2); font-weight: 400;
+    line-height: 1.4;
+    white-space: nowrap;
+  }
+  .nav-brand-text strong { display: block; font-weight: 600; color: var(--ink); }
+  .nav-brand-sub { display: block; }
+  .nav-links-wrap { position: relative; display: flex; }
+  .nav-links {
+    display: flex; align-items: stretch; list-style: none; gap: 0;
+    position: relative;
+  }
+  .nav-links li { display: flex; align-items: center; }
+  .nav-links a {
+    display: flex; align-items: center;
+    font-family: var(--sans); font-size: 0.78rem;
+    letter-spacing: 0.1em; text-transform: uppercase;
+    color: var(--muted); text-decoration: none;
+    padding: 0.7rem 0.95rem;
+    margin: 0 0.15rem;
+    position: relative; z-index: 1;
+    white-space: nowrap;
+    transition: color 0.3s;
+  }
+  .nav-links a:hover { color: var(--ink); }
+  /* Base (mobile dropdown) active color — red on the light dropdown
+     background. Overridden below at desktop width, where the active
+     link instead sits on a solid red pill and needs light text. */
+  .nav-links a.active { color: var(--red); }
+  @media (min-width: 1461px) {
+    .nav-links a.active { color: #F3EFE5; }
+  }
+  .nav-links li.nav-links-cta { display: none; }
+  /* A solid pill glides between sections as you scroll — deliberately
+     not an underline, so it reads as a single lively marker rather
+     than text decoration. The overshoot easing gives it a light,
+     springy landing instead of a flat mechanical slide. */
+  .nav-indicator {
+    position: absolute; top: 50%; height: 34px;
+    transform: translateY(-50%);
+    background: var(--red);
+    border-radius: 999px;
+    opacity: 0;
+    box-shadow: 0 3px 10px rgba(122,30,30,0.3);
+    transition: left 0.55s cubic-bezier(0.34,1.56,0.64,1),
+                width 0.55s cubic-bezier(0.34,1.56,0.64,1),
+                opacity 0.2s ease;
+    pointer-events: none;
+    z-index: 0;
+  }
+  .nav-indicator.visible { opacity: 1; }
+  .nav-donate {
+    display: flex; align-items: center;
+    margin-left: 1rem;
+    border-left: 1px solid var(--rule);
+    padding-left: 1.2rem;
+    flex: none;
+  }
+  .nav-donate a {
+    font-family: var(--sans); font-size: 0.78rem;
+    letter-spacing: 0.14em; text-transform: uppercase;
+    background: var(--red); color: #F3EFE5;
+    padding: 0.6rem 1.3rem; text-decoration: none;
+    white-space: nowrap;
+    transition: opacity 0.25s;
+  }
+  .nav-donate a:hover { opacity: 0.85; }
+
+  /* ── HERO ── */
+  /* Full-bleed background video behind everything, including the
+     title — text sits on a scrim above it. Text/accent colors here
+     follow the same "gold accent on dark ground" rule used in the
+     Crypt section, since the usual dark-red accent doesn't have
+     enough contrast against a dark video. */
+  #hero {
+    position: relative;
+    min-height: 100vh;
+    display: grid;
+    grid-template-rows: 1fr auto auto;
+    overflow: hidden;
+    /* No padding-top here: nav is position:sticky, which already
+       reserves its own height in normal document flow, so #hero
+       naturally starts right after it -- an extra top offset here
+       would just double that space and push the title down further
+       than necessary. */
+    background: var(--ink);
+  }
+  .hero-video-bg {
+    /* Slightly overscanned (-1% on every edge, 102% size) rather than
+       a plain inset:0 -- some browsers leave a hairline seam at the
+       top/bottom edge of a filtered video during compositing, and the
+       overscan pushes that seam off-screen instead of trying to
+       eliminate it. */
+    position: absolute;
+    top: -1%; right: -1%; bottom: -1%; left: -1%;
+    width: 102%; height: 102%;
+    object-fit: cover;
+    z-index: 0;
+    /* The animation loops through some very bright frames (white and
+       orange/brown walls) that no amount of gradient alone reliably
+       beats. Dimming the footage itself, uniformly, is what actually
+       guarantees legibility no matter which frame is showing. */
+    filter: brightness(0.5) saturate(0.85);
+  }
+  .hero-scrim {
+    position: absolute; inset: 0;
+    /* Stacked on top of the dimmed video: a strong fixed darkening on
+       the left (where the text sits), plus a vertical gradient so the
+       stats/bottom bars stay readable too, regardless of what the
+       video is showing there. */
+    background:
+      linear-gradient(100deg, rgba(15,13,11,0.94) 0%, rgba(15,13,11,0.88) 30%, rgba(15,13,11,0.65) 55%, rgba(15,13,11,0.5) 100%),
+      linear-gradient(180deg, rgba(15,13,11,0.45) 0%, rgba(15,13,11,0.6) 55%, rgba(15,13,11,0.85) 100%);
+    z-index: 1;
+  }
+  .hero-body {
+    position: relative; z-index: 2;
+    max-width: 700px;
+    padding: 3.5rem 3.5rem 3rem;
+    display: flex; flex-direction: column; justify-content: flex-start;
+    /* Extra insurance directly behind the most important text: a soft
+       dark panel with a blurred edge, so even a pure-white or bright
+       orange video frame directly behind the words can't win. */
+    background: linear-gradient(115deg, rgba(10,9,8,0.55) 0%, rgba(10,9,8,0.4) 65%, rgba(10,9,8,0) 100%);
+  }
+  .hero-eyebrow {
+    display: flex; align-items: center; gap: 1rem;
+    font-family: var(--sans); font-size: 0.78rem;
+    letter-spacing: 0.3em; text-transform: uppercase; color: #C9A85C;
+    margin-bottom: 2rem;
+    text-shadow: 0 2px 10px rgba(0,0,0,0.55);
+  }
+  .hero-eyebrow::before {
+    content: ''; display: block;
+    width: 28px; height: 1px; background: #C9A85C;
+  }
+  .hero-h1 {
+    font-family: var(--serif);
+    font-size: clamp(3.2rem, 6vw, 6rem);
+    font-weight: 900; line-height: 0.96;
+    color: #F3EFE5;
+    letter-spacing: -0.02em;
+    text-shadow: 0 3px 16px rgba(0,0,0,0.5);
+  }
+  .hero-h1 em {
+    /* Upright, not italic — Fraunces' italic lowercase "b" has an
+       unusual swash that reads poorly at this size; upright keeps the
+       same bold/color emphasis without it. */
+    font-style: normal; font-weight: 900;
+    color: #C9A85C; display: block;
+  }
+  .hero-h1 span { display: block; }
+  .hero-sub-area { margin-top: 2.2rem; }
+  .hero-rule { height: 1px; background: rgba(243,239,229,0.25); margin-bottom: 1.5rem; }
+  .hero-desc {
+    font-size: 1.05rem; line-height: 1.9; color: var(--muted-on-dark);
+    max-width: 440px;
+    text-shadow: 0 2px 10px rgba(0,0,0,0.55);
+  }
+  .hero-actions { margin-top: 2rem; display: flex; gap: 1rem; flex-wrap: wrap; align-items: center; }
+  .hero-stats {
+    position: relative; z-index: 2;
+    display: grid; grid-template-columns: repeat(3,1fr);
+    border-top: 1px solid rgba(243,239,229,0.18);
+    padding: 0 3.5rem;
+  }
+  .hero-stat {
+    min-width: 0;
+    padding: 1.6rem 1.5rem;
+    border-right: 1px solid rgba(243,239,229,0.18);
+  }
+  .hero-stat:last-child { border-right: none; }
+  .hero-stat-num {
+    font-family: var(--serif); font-size: 2.4rem; font-weight: 700;
+    color: #F3EFE5; line-height: 1;
+    margin-bottom: 0.3rem;
+    text-shadow: 0 2px 10px rgba(0,0,0,0.55);
+  }
+  .hero-stat-num.accent { color: #C9A85C; }
+  .hero-stat-label {
+    font-family: var(--sans); font-size: 0.74rem;
+    letter-spacing: 0.22em; text-transform: uppercase; color: var(--muted-on-dark);
+    text-shadow: 0 2px 8px rgba(0,0,0,0.55);
+  }
+  .hero-bottom {
+    position: relative; z-index: 2;
+    border-top: 1px solid rgba(243,239,229,0.18);
+    padding: 1.6rem 3.5rem;
+    display: flex; align-items: center; justify-content: space-between;
+    flex-wrap: wrap; gap: 1rem;
+  }
+  .hero-location {
+    font-family: var(--sans); font-size: 0.78rem;
+    letter-spacing: 0.22em; text-transform: uppercase; color: var(--muted-on-dark);
+    display: flex; align-items: center; gap: 1rem;
+    text-shadow: 0 2px 8px rgba(0,0,0,0.55);
+  }
+  .hero-location::before {
+    content: ''; display: block; width: 6px; height: 6px;
+    border: 1px solid #C9A85C; border-radius: 50%;
+    background: #C9A85C;
+  }
+  .hero-scroll-hint {
+    font-family: var(--sans); font-size: 0.78rem;
+    letter-spacing: 0.2em; text-transform: uppercase; color: var(--muted-on-dark);
+    text-shadow: 0 2px 8px rgba(0,0,0,0.55);
+  }
+  .btn-ink {
+    font-family: var(--sans); font-size: 0.8rem;
+    letter-spacing: 0.2em; text-transform: uppercase;
+    background: var(--ink); color: var(--bg);
+    padding: 0.85rem 2.2rem; text-decoration: none;
+    transition: background 0.25s;
+  }
+  .btn-ink:hover { background: var(--ink2); }
+  .btn-outline-red {
+    font-family: var(--sans); font-size: 0.8rem;
+    letter-spacing: 0.2em; text-transform: uppercase;
+    border: 1px solid var(--red); color: var(--red);
+    padding: 0.85rem 2.2rem; text-decoration: none;
+    transition: background 0.25s, color 0.25s;
+  }
+  .btn-outline-red:hover { background: var(--red); color: var(--bg); }
+  /* On the hero's dark video ground, the outline button needs the same
+     light-on-dark treatment as everything else here. A faint dark fill
+     (rather than fully transparent) keeps the border/text readable
+     even where the video underneath happens to be bright. */
+  #hero .btn-outline-red {
+    border-color: #C9A85C; color: #C9A85C;
+    background: rgba(15,13,11,0.35);
+  }
+  #hero .btn-outline-red:hover { background: #C9A85C; color: var(--ink); }
+
+  /* ── SHARED ── */
+  .band { border-top: 1px solid var(--rule); border-bottom: 1px solid var(--rule); }
+  .label-row {
+    display: flex; align-items: center; gap: 1.2rem;
+    font-family: var(--sans); font-size: 0.76rem;
+    letter-spacing: 0.3em; text-transform: uppercase; color: var(--red);
+    margin-bottom: 2rem;
+  }
+  .label-row::before {
+    content: ''; display: block; width: 24px; height: 1px; background: var(--red);
+  }
+  .display-title {
+    font-family: var(--serif);
+    font-size: clamp(2.4rem, 4vw, 4.2rem);
+    font-weight: 700; line-height: 1.05;
+    color: var(--ink); letter-spacing: -0.02em;
+    margin-bottom: 2rem;
+  }
+  .display-title em { font-style: normal; font-weight: 900; color: var(--red); }
+  .prose {
+    font-size: 1.1rem; line-height: 1.95;
+    color: var(--muted); max-width: 600px;
+  }
+
+  /* ── VISION ── */
+  #vision { padding: 7rem 3.5rem; }
+  .vision-grid {
+    display: grid; grid-template-columns: 5fr 4fr; gap: 7rem; align-items: start;
+  }
+  .access-callout {
+    display: flex; gap: 1.1rem; align-items: flex-start;
+    background: var(--bg2);
+    border-left: 3px solid var(--red);
+    padding: 1.5rem 1.7rem;
+    margin: 2rem 0;
+  }
+  .access-callout svg { flex: none; width: 30px; height: 30px; color: var(--red); margin-top: 0.15rem; }
+  .access-callout-title {
+    font-family: var(--sans); font-weight: 700; font-size: 1.02rem;
+    color: var(--ink); margin-bottom: 0.5rem;
+  }
+  .access-callout p:last-child {
+    font-family: var(--sans); font-size: 0.98rem; line-height: 1.7;
+    color: var(--ink2); font-weight: 300;
+  }
+  /* Full-sentence quotes use the text serif (Lora), not the display
+     serif — a display face is tuned for a few large words, not
+     paragraph-length reading. */
+  .vision-pull {
+    font-family: var(--body); font-size: clamp(1.4rem, 2.2vw, 1.8rem);
+    font-style: italic; font-weight: 400;
+    color: var(--ink2); line-height: 1.55;
+    border-left: 3px solid var(--red);
+    padding-left: 2rem;
+    margin: 3rem 0;
+  }
+
+  /* ── VISION STATS + LOCATION ── */
+  .vision-stats { margin-top: 2.5rem; display: flex; gap: 3rem; flex-wrap: wrap; }
+  .vision-stat-num {
+    font-family: var(--serif); font-size: 2.2rem; font-weight: 700;
+    color: var(--ink); line-height: 1;
+  }
+  .vision-stat-num.accent { color: var(--red); }
+  .vision-stat-label {
+    font-family: var(--sans); font-size: 0.74rem; letter-spacing: 0.22em;
+    text-transform: uppercase; color: var(--muted); margin-top: 0.3rem;
+  }
+  .vision-img { position: sticky; top: 100px; }
+  .vision-img-box {
+    background: var(--bg2);
+    border: 1px solid var(--rule);
+    aspect-ratio: 3/4;
+    display: flex; flex-direction: column; align-items: center; justify-content: center;
+    gap: 1rem; position: relative;
+  }
+  .vision-img-box svg { opacity: 0.14; }
+  .vision-img-caption {
+    position: absolute; bottom: 1rem; left: 0; right: 0;
+    text-align: center;
+    font-family: var(--sans); font-size: 0.74rem;
+    letter-spacing: 0.22em; text-transform: uppercase; color: var(--muted);
+  }
+  .vision-location {
+    margin-top: 1px;
+    background: var(--bg2);
+    border: 1px solid var(--rule);
+    border-top: none;
+    padding: 1.2rem 1.5rem;
+  }
+  .vision-location-label {
+    font-family: var(--sans); font-size: 0.74rem; letter-spacing: 0.22em;
+    text-transform: uppercase; color: var(--muted); margin-bottom: 0.4rem;
+  }
+  .vision-location-value { font-size: 0.98rem; color: var(--ink2); line-height: 1.5; }
+
+  /* ── FILM (the main video — its own prominent, centered moment) ── */
+  #film {
+    padding: 7rem 3.5rem;
+    border-top: 1px solid var(--rule);
+    background: var(--bg2);
+    text-align: center;
+  }
+  .film-wrap { max-width: 960px; margin: 0 auto; }
+  #film .label-row, #film .display-title { justify-content: center; }
+  #film .label-row::before { display: none; }
+  #film .prose { max-width: 620px; margin: 0 auto 3rem; text-align: left; }
+  .film-frame {
+    position: relative;
+    aspect-ratio: 16 / 9;
+    background: var(--ink);
+    border: 1px solid var(--rule);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+    box-shadow: 0 30px 70px -20px rgba(26,23,20,0.35);
+  }
+  .film-frame svg { opacity: 0.14; position: absolute; }
+  .film-badge {
+    position: absolute;
+    top: 1.4rem; left: 50%;
+    transform: translateX(-50%);
+    font-family: var(--sans); font-size: 0.72rem;
+    letter-spacing: 0.2em; text-transform: uppercase;
+    color: var(--muted);
+    background: var(--bg);
+    border: 1px solid var(--rule);
+    padding: 0.45rem 1rem;
+  }
+  .film-play {
+    position: absolute; top: 50%; left: 50%;
+    transform: translate(-50%, -50%);
+    width: 92px; height: 92px;
+    border-radius: 50%;
+    border: none;
+    background: rgba(243,239,229,0.96);
+    display: flex; align-items: center; justify-content: center;
+    cursor: pointer;
+    box-shadow: 0 14px 34px rgba(26,23,20,0.4);
+    transition: transform 0.25s cubic-bezier(0.34,1.56,0.64,1), background 0.2s;
+  }
+  .film-play:hover { transform: translate(-50%, -50%) scale(1.07); background: #fff; }
+  .film-play svg { fill: var(--ink); margin-left: 4px; }
+  .film-play.is-hidden { display: none; }
+  .film-video { width: 100%; height: 100%; object-fit: cover; display: block; }
+  .film-note {
+    margin-top: 1.4rem;
+    font-family: var(--sans); font-size: 0.86rem;
+    color: var(--muted); line-height: 1.7;
+  }
+
+  /* ── THE CRYPT ── */
+  #crypt {
+    background: var(--ink);
+    padding: 8rem 3.5rem;
+  }
+  #crypt .label-row { color: #C9A85C; }
+  #crypt .label-row::before { background: #C9A85C; }
+  #crypt .display-title { color: #F3EFE5; }
+  #crypt .display-title em { color: #C9A85C; }
+  #crypt .prose { color: var(--muted-on-dark); max-width: 100%; }
+  .crypt-layout {
+    display: grid; grid-template-columns: 1fr 1fr; gap: 5rem;
+    margin-top: 4rem; align-items: start;
+  }
+  .crypt-intro { }
+  .crypt-items { }
+  .crypt-item {
+    border-top: 1px solid rgba(255,255,255,0.08);
+    padding: 2.4rem 0;
+    display: grid; grid-template-columns: 60px 1fr; gap: 1.5rem;
+    align-items: start;
+    cursor: default;
+    transition: background 0.3s;
+  }
+  .crypt-item:hover { background: rgba(255,255,255,0.02); }
+  .crypt-num {
+    font-family: var(--serif); font-size: 3rem; font-weight: 900;
+    color: rgba(201,168,92,0.55); line-height: 1;
+    letter-spacing: -0.04em;
+  }
+  .crypt-item-title {
+    font-family: var(--serif); font-size: 1.4rem; font-weight: 700;
+    color: #EAE4D6; margin-bottom: 0.6rem; letter-spacing: -0.01em;
+  }
+  .crypt-item-body {
+    font-size: 1rem; line-height: 1.8; color: var(--muted-on-dark);
+    font-family: var(--sans); font-weight: 300; letter-spacing: 0.02em;
+  }
+  .crypt-large-img {
+    background: rgba(255,255,255,0.04);
+    border: 1px solid rgba(255,255,255,0.06);
+    aspect-ratio: 4/5;
+    display: flex; flex-direction: column; align-items: center; justify-content: center;
+    gap: 1rem;
+    margin-top: 2rem;
+  }
+  .crypt-large-img svg { opacity: 0.1; }
+  .crypt-large-img span {
+    font-family: var(--sans); font-size: 0.72rem;
+    letter-spacing: 0.2em; text-transform: uppercase; color: var(--muted-on-dark);
+  }
+
+  /* ── HERITAGE ── */
+  #heritage { padding: 7rem 3.5rem; }
+  .heritage-header {
+    display: grid; grid-template-columns: 1fr 1fr; gap: 4rem;
+    margin-bottom: 5rem; padding-bottom: 4rem;
+    border-bottom: 1px solid var(--rule);
+    align-items: end;
+  }
+  .heritage-right-text .prose { max-width: 100%; }
+  .quote-large {
+    font-family: var(--body);
+    font-size: clamp(1.7rem, 2.8vw, 2.6rem);
+    font-style: italic; font-weight: 400;
+    color: var(--ink); line-height: 1.35;
+    letter-spacing: -0.005em;
+  }
+  .quote-large cite {
+    display: block; margin-top: 1.2rem;
+    font-family: var(--sans); font-size: 0.78rem;
+    letter-spacing: 0.22em; text-transform: uppercase;
+    color: var(--muted); font-style: normal;
+  }
+  .timeline-horizontal {
+    display: grid; grid-template-columns: repeat(4, 1fr);
+    gap: 0;
+  }
+  .tl-item {
+    border-left: 1px solid var(--rule);
+    padding: 0 2rem 0 2rem;
+    position: relative;
+  }
+  .tl-dot {
+    width: 9px; height: 9px; border-radius: 50%;
+    border: 1.5px solid var(--red); background: var(--bg);
+    position: absolute; left: -5px; top: 4px;
+  }
+  .tl-year {
+    font-family: var(--serif); font-size: 2rem; font-weight: 700;
+    color: var(--ink); line-height: 1; margin-bottom: 0.8rem;
+    letter-spacing: -0.02em;
+  }
+  .tl-text {
+    font-family: var(--sans); font-size: 0.94rem;
+    line-height: 1.75; color: var(--muted); font-weight: 300;
+  }
+
+  /* ── INVESTMENT (budget + progress) ── */
+  #investment {
+    padding: 8rem 3.5rem;
+    border-top: 1px solid var(--rule);
+  }
+  .investment-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 5rem;
+    align-items: start;
+  }
+  .budget-bar {
+    display: flex;
+    width: 100%;
+    height: 30px;
+    border: 1px solid var(--rule);
+    overflow: hidden;
+  }
+  .budget-bar span { display: block; height: 100%; }
+  .budget-legend { margin-top: 1.6rem; }
+  .budget-legend li {
+    list-style: none;
+    display: flex;
+    align-items: baseline;
+    gap: 0.7rem;
+    padding: 0.6rem 0;
+    border-top: 1px solid var(--rule);
+    font-family: var(--sans); font-size: 0.92rem; color: var(--ink2);
+  }
+  .budget-legend .chip { width: 11px; height: 11px; flex: none; }
+  .budget-legend .amt {
+    margin-left: auto;
+    font-family: var(--serif); font-weight: 700; color: var(--ink);
+    font-variant-numeric: tabular-nums;
+  }
+  .budget-note {
+    margin-top: 1.4rem;
+    font-family: var(--sans); font-size: 0.86rem;
+    color: var(--muted); line-height: 1.7;
+  }
+  .progress-figures {
+    display: flex; align-items: baseline; justify-content: space-between;
+    flex-wrap: wrap; gap: 0.5rem 1rem;
+    margin-bottom: 0.9rem;
+  }
+  .progress-figures .raised {
+    font-family: var(--serif); font-size: 2.4rem; font-weight: 700;
+    color: var(--red); line-height: 1;
+    font-variant-numeric: tabular-nums;
+  }
+  .progress-figures .of-target {
+    font-family: var(--sans); font-size: 0.86rem; color: var(--muted);
+  }
+  .progress-track { height: 12px; background: var(--bg2); border: 1px solid var(--rule); }
+  .progress-fill { height: 100%; background: var(--red); }
+  .progress-caption {
+    margin-top: 0.9rem;
+    font-family: var(--sans); font-size: 0.86rem; color: var(--muted); line-height: 1.7;
+  }
+  @media (max-width: 960px) {
+    .investment-grid { grid-template-columns: 1fr; gap: 3.5rem; }
+  }
+
+  /* ── CONTACT ── */
+  #contact {
+    padding: 8rem 3.5rem;
+    display: grid; grid-template-columns: 1fr 1fr; gap: 6rem;
+    align-items: start;
+  }
+  .contact-title {
+    font-family: var(--serif); font-size: clamp(2.8rem, 5vw, 5rem);
+    font-weight: 900; line-height: 0.95;
+    color: var(--ink); letter-spacing: -0.03em;
+    margin-bottom: 0;
+  }
+  .contact-title em { font-style: normal; font-weight: 900; color: var(--red); }
+  .contact-right { padding-top: 0.5rem; }
+  .contact-right .prose { max-width: 100%; margin-bottom: 2.5rem; }
+  .contact-email-link {
+    display: block;
+    font-family: var(--serif); font-size: 1.3rem; font-style: italic;
+    color: var(--ink); text-decoration: none;
+    border-bottom: 1px solid var(--rule);
+    padding-bottom: 0.8rem;
+    margin-bottom: 2.5rem;
+    transition: color 0.25s, border-color 0.25s;
+  }
+  .contact-email-link:hover { color: var(--red); border-color: var(--red); }
+  .contact-details {
+    display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.5rem;
+  }
+  .cd-label {
+    font-family: var(--sans); font-size: 0.74rem;
+    letter-spacing: 0.26em; text-transform: uppercase;
+    color: var(--muted); margin-bottom: 0.4rem;
+  }
+  .cd-value {
+    font-size: 0.98rem; line-height: 1.6; color: var(--ink2);
+    font-family: var(--sans); font-weight: 300;
+  }
+
+  /* ── FOOTER ── */
+  footer {
+    background: var(--ink);
+    padding: 2.5rem 3.5rem;
+    display: flex; align-items: center; justify-content: space-between;
+    flex-wrap: wrap; gap: 1rem;
+  }
+  .footer-brand {
+    font-family: var(--sans); font-size: 0.76rem;
+    letter-spacing: 0.26em; text-transform: uppercase;
+    color: var(--muted-on-dark);
+  }
+  .footer-links { display: flex; flex-wrap: wrap; gap: 0.6rem 1.6rem; }
+  .footer-links a {
+    font-family: var(--sans); font-size: 0.74rem;
+    letter-spacing: 0.2em; text-transform: uppercase;
+    color: var(--muted-on-dark); text-decoration: none; transition: color 0.25s;
+  }
+  .footer-links a:hover { color: #C9A85C; }
+  .footer-copy {
+    font-family: var(--sans); font-size: 0.74rem;
+    letter-spacing: 0.14em; color: var(--muted-on-dark);
+  }
+
+  /* ── REVEAL ── */
+  .reveal {
+    opacity: 0; transform: translateY(28px);
+    transition: opacity 0.85s ease, transform 0.85s ease;
+  }
+  .reveal.visible { opacity: 1; transform: none; }
+  .reveal-d1 { transition-delay: 0.1s; }
+  .reveal-d2 { transition-delay: 0.22s; }
+  .reveal-d3 { transition-delay: 0.34s; }
+  .reveal-left {
+    opacity: 0; transform: translateX(-28px);
+    transition: opacity 0.85s ease, transform 0.85s ease;
+  }
+  .reveal-left.visible { opacity: 1; transform: none; }
+
+  /* ── RESPONSIVE ── */
+  /* Nav collapses to the hamburger menu well before the page's own
+     content breakpoint (960px) — with 7 links plus the CTA, the bar
+     itself runs out of room around ~1400px even though the rest of
+     the page layout is still comfortably "desktop" at that width. */
+  /* No dropdown menu below this width — there's nothing to open.
+     Scrolling is the whole navigation model; the live "where am I"
+     label (.nav-current-section) is what replaces menu selection, and
+     the nav-links list only exists in the DOM here to drive that
+     label and the scrollspy, never rendered. This is also why the
+     brand name gets to stay full-size and readable instead of being
+     squeezed for room a dropdown toggle no longer needs. */
+  @media (max-width: 1460px) {
+    nav { padding: 0.5rem 1.25rem; }
+    .nav-current-section { display: block; font-size: 0.76rem; letter-spacing: 0.08em; }
+    .nav-indicator { display: none; }
+    .nav-links { display: none; }
+    /* No persistent CTA button here either — between the full brand
+       name and the live section label there isn't graceful room for
+       one, and the hero's own buttons plus the Contact section
+       already carries that call to action further down. */
+    .nav-donate { display: none; }
+  }
+  @media (max-width: 960px) {
+    #vision, #heritage, #contact { padding: 5rem 1.5rem; }
+    #crypt, #investment, #film { padding: 5rem 1.5rem; }
+    .vision-grid, .crypt-layout, .heritage-header,
+    #contact { grid-template-columns: 1fr; gap: 3rem; }
+    .hero-body { padding: 2.25rem 1.5rem 2.5rem; max-width: 100%; }
+    .hero-stats { padding: 0 1.5rem; }
+    .hero-stat { padding: 1.4rem 0.6rem; }
+    .hero-stat-num { font-size: 1.9rem; }
+    .hero-bottom { padding: 1.5rem; }
+    .timeline-horizontal { grid-template-columns: 1fr 1fr; gap: 3rem; }
+  }
+  @media (max-width: 640px) {
+    .timeline-horizontal { grid-template-columns: 1fr; }
+    .tl-item { border-left: none; border-top: 1px solid var(--rule); padding: 1.5rem 0 0; }
+    .tl-dot { left: -5px; top: -5px; }
+    .contact-details { grid-template-columns: 1fr; gap: 1rem; }
+    footer { flex-direction: column; align-items: flex-start; gap: 1.2rem; }
+  }
+  /* On a short viewport (a smaller laptop window, a scaled-up display,
+     a phone in landscape) the hero's title + text + buttons + stats
+     row can add up to more than one screen, forcing a second scroll
+     just to see "1862 / 160+ / Now" that was supposed to be visible
+     straight away. These two breakpoints tighten the SPACING around
+     that content (margins/padding only, never font-size) so everything
+     fits within one view without needing to shrink the text itself.
+     Placed at the very end of the stylesheet, after the width-based
+     mobile rules, so it always wins on a viewport that's both narrow
+     AND short (e.g. a phone in landscape). */
+  @media (max-height: 820px) {
+    .hero-eyebrow { margin-bottom: 1.2rem; }
+    .hero-sub-area { margin-top: 1.4rem; }
+    .hero-rule { margin-bottom: 1rem; }
+    .hero-actions { margin-top: 1.2rem; }
+    .hero-body { padding-top: 2.2rem; padding-bottom: 1.8rem; }
+    .hero-stat { padding: 1rem 1.5rem; }
+    .hero-bottom { padding: 1rem 3.5rem; }
+  }
+  @media (max-height: 680px) {
+    .hero-desc { line-height: 1.6; }
+    .hero-eyebrow { margin-bottom: 0.8rem; }
+    .hero-sub-area { margin-top: 1rem; }
+    .hero-rule { margin-bottom: 0.7rem; }
+    .hero-actions { margin-top: 0.9rem; }
+    .hero-body { padding-top: 1.5rem; padding-bottom: 1.2rem; }
+    .hero-stat { padding: 0.7rem 1.5rem; }
+    .hero-bottom { padding: 0.7rem 3.5rem; }
+  }
+  /* Very short (a phone rotated to landscape): the same content just
+     can not fit at full size, so this tier also trims the title size
+     a little -- still well above body-text size, just not the full
+     desktop scale. */
+  @media (max-height: 480px) {
+    .hero-h1 { font-size: clamp(2.2rem, 5vw, 3.4rem); }
+    .hero-desc { display: none; }
+    .hero-eyebrow { margin-bottom: 0.5rem; }
+    .hero-sub-area { margin-top: 0.6rem; }
+    .hero-stat-num { font-size: 1.6rem; }
+    .hero-stat { padding: 0.5rem 1rem; }
+    .hero-bottom { padding: 0.5rem 2rem; }
+  }
+</style>
+</head>
+<body>
+
+<!-- ============================================================
+     THIS IS THE RICH / MAJOR DONOR VERSION of the site.
+     ============================================================
+     Shown privately (face to face or by direct link) to major
+     donors, before the public appeal launches. On purpose it has
+     ONLY the hero and the film -- no donate button, no progress
+     bar, no other sections -- because the ask happens in the
+     conversation itself, not on the page. The full public site
+     (with everything else, including the Donate button and the
+     progress bar) lives in index.html, for when the appeal opens
+     up to everyone.
+     ============================================================ -->
+
+<!-- ── SKIP LINK (accessibility: lets keyboard/screen-reader users jump past the menu) ── -->
+<a class="skip-link" href="#main-content">Skip to main content</a>
+
+<!-- ── NAV (brand only -- nothing else to navigate to on this page) ── -->
+<nav id="main-nav">
+  <a class="nav-brand" href="#">
+    <div class="nav-brand-cross"></div>
+    <div class="nav-brand-text">
+      <strong>St Charles Borromeo</strong>
+      <span class="nav-brand-sub">Ogle Street · London</span>
+    </div>
+  </a>
+</nav>
+
+<main id="main-content">
+<!-- ── HERO ── -->
+<section id="hero">
+  <!--
+    HOW TO ADD THE HERO BACKGROUND VIDEO ("architect animation")
+    ────────────────────────────────────────────────────────────
+    1) Copy the .mp4 file (not the .mov one -- .mp4 plays in every
+       browser, .mov often doesn't) into the "media" folder that
+       sits next to this HTML file.
+    2) Rename it, if it has spaces in the name, to:
+           architect-animation.mp4
+    3) In Sublime Text press Ctrl+F (Cmd+F on a Mac) and search for:
+           REPLACE_HERO_VIDEO_HERE
+    4) Delete that whole line (the short comment line, further down,
+       that just says REPLACE_HERO_VIDEO_HERE) and paste this in its
+       place:
+
+     <div class="hero-scrim" aria-hidden="true"></div>
+
+    5) Save the file and open it in a browser -- the animation should
+       now play silently on a loop, behind the very top of the page.
+  -->
+  <!-- REPLACE_HERO_VIDEO_HERE -->
+ 
+  <video class="hero-video-bg" autoplay muted loop playsinline aria-hidden="true" disablepictureinpicture disableremoteplayback>
+      <source src="media/architect-animation.mp4" type="video/mp4">
+    </video>
+  <div class="hero-body">
+    <p class="hero-eyebrow">The Restoration</p>
+    <h1 class="hero-h1">
+      <span>A Church</span>
+      <em>Reborn</em>
+      <span>in Stone</span>
+    </h1>
+    <div class="hero-sub-area">
+      <div class="hero-rule"></div>
+      <p class="hero-desc">
+        St Charles Borromeo on Ogle Street is embarking on a once-in-a-generation
+        restoration — returning this remarkable London church to its full glory and
+        transforming its crypt into a space of extraordinary beauty.
+      </p>
+      <div class="hero-actions">
+        <a href="#film" class="btn-ink">Watch the Film</a>
+      </div>
+    </div>
+  </div>
+
+  <div class="hero-stats">
+    <div class="hero-stat">
+      <div class="hero-stat-num">1862</div>
+      <div class="hero-stat-label">Founded</div>
+    </div>
+    <div class="hero-stat">
+      <div class="hero-stat-num">160<span style="font-size:1.2rem;">+</span></div>
+      <div class="hero-stat-label">Years of Service</div>
+    </div>
+    <div class="hero-stat">
+      <div class="hero-stat-num accent">Now</div>
+      <div class="hero-stat-label">The Restoration</div>
+    </div>
+  </div>
+
+  <div class="hero-bottom">
+    <div class="hero-location">London, Diocese of Westminster · Roman Catholic Parish</div>
+    <div class="hero-scroll-hint">Scroll to discover ↓</div>
+  </div>
+</section>
+
+<!-- ============================================================
+     THE FILM — the main video, and the reason this appeal exists.
+     Deliberately its own section, centered and full-width, rather
+     than sharing space with anything else: everything after this
+     point makes its case in detail, but this is where the "why"
+     actually lives.
+
+     NOTE: unlike the short, silent, looping hero background video,
+     this is the longer "main" film and plays with normal controls —
+     it does NOT autoplay. Muting someone's sound without asking or
+     forcing playback on load is bad practice for any video with real
+     narration/audio, and this one is meant to be deliberately
+     watched, not glanced past as ambient wallpaper.
+
+     Currently showing the "in production" placeholder below —
+     Fergal hasn't signed off on the shortened fundraising film yet.
+     ============================================================ -->
+<!-- ── FILM ── -->
+<section id="film">
+  <div class="film-wrap reveal">
+    <p class="label-row">Before Anything Else</p>
+    <h2 class="display-title">Watch <em>This</em> First</h2>
+    <p class="prose">This film is why the workgroup started this appeal. Everything else on this page — the plans, the budget, the ways to help — follows from what you're about to see.</p>
+    <!--
+      HOW TO ADD THE MAIN FILM ("Borromeo_short") -- ONLY DO THIS ONCE
+      FERGAL HAS APPROVED IT. Until then, leave the "film-frame" block
+      below exactly as it is; it shows an "in production" placeholder
+      instead of a real video.
+      ────────────────────────────────────────────────────────────
+      1) Copy the .mp4 file into the "media" folder next to this HTML
+         file. Rename it, if it has spaces, to: borromeo-short.mp4
+      2) Also grab one still frame from the video as a .jpg (any
+         screenshot of it works) and put that in "media" too, named:
+         borromeo-short-poster.jpg -- it's shown before anyone presses
+         play, so the section never looks blank while loading.
+      3) Select the ENTIRE block below -- from the line that starts
+         <div class="film-frame"> down to its matching closing </div>
+         a few lines later -- and delete it.
+      4) Paste this in its place:
+
+      <div class="film-frame">
+        <video class="film-video" id="film-video" preload="metadata" playsinline disablepictureinpicture disableremoteplayback
+               poster="media/borromeo-short-poster.jpg">
+          <source src="media/borromeo-short.mp4" type="video/mp4">
+          Your browser does not support video playback.
+        </video>
+        <button class="film-play" id="film-play-btn" type="button" aria-label="Play the film">
+          <svg width="28" height="28" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M8 5v14l11-7z"/></svg>
+        </button>
+      </div>
+
+      <div class="film-frame">
+      <span class="film-badge">Film in production</span>
+      <svg width="70%" height="70%" viewBox="0 0 200 120" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path d="M10 110 L10 55 Q100 5 190 55 L190 110" stroke="#1A1714" stroke-width="1.2" fill="none"/>
+        <line x1="10" y1="110" x2="190" y2="110" stroke="#7A1E1E" stroke-width="1.5"/>
+      </svg>
+      <button class="film-play" type="button" aria-disabled="true" aria-label="Film not yet available — in production">
+        <svg width="28" height="28" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M8 5v14l11-7z"/></svg>
+      </button>
+    </div>
+
+      5) Save and open in a browser -- you'll see the poster image with
+         a play button; clicking it plays the film with sound and
+         normal pause/seek controls (it does not autoplay).
+    -->
+
+    <div class="film-frame">
+        <video class="film-video" id="film-video" preload="metadata" playsinline disablepictureinpicture disableremoteplayback
+               poster="media/borromeo-short-poster.jpg">
+          <source src="media/borromeo-short.mp4" type="video/mp4">
+          Your browser does not support video playback.
+        </video>
+        <button class="film-play" id="film-play-btn" type="button" aria-label="Play the film">
+          <svg width="28" height="28" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M8 5v14l11-7z"/></svg>
+        </button>
+      </div>
+    
+  </div>
+</section>
+
+</main>
+
+<!-- ── FOOTER (trimmed -- no links to sections that don't exist on this page) ── -->
+<footer>
+  <div class="footer-brand">St Charles Borromeo · Ogle Street · London W1W 6HS</div>
+  <div class="footer-copy">© St Charles Borromeo</div>
+</footer>
+
+<script>
+  // Nav scroll shadow
+  const nav = document.getElementById('main-nav');
+  window.addEventListener('scroll', () => {
+    nav.classList.toggle('scrolled', window.scrollY > 60);
+  }, { passive: true });
+
+  // Some browsers (especially opening a file directly, rather than a
+  // real https:// page) hold off actually painting an autoplay video's
+  // frames until the page has seen some user interaction, even with
+  // the autoplay attribute set -- it can sit on a blank/fallback frame
+  // until the first scroll, click, etc. Calling .play() explicitly,
+  // and again on the first interaction as a safety net, avoids relying
+  // on the autoplay attribute alone.
+  const heroVideo = document.querySelector('.hero-video-bg');
+  if (heroVideo) {
+    const tryPlayHeroVideo = () => heroVideo.play().catch(() => {});
+    tryPlayHeroVideo();
+    ['scroll', 'click', 'touchstart', 'keydown'].forEach(evt =>
+      window.addEventListener(evt, tryPlayHeroVideo, { once: true, passive: true })
+    );
+  }
+
+  // Film play button -- a big centered button drives the initial play
+  // (rather than the tiny native control), then hands off to normal
+  // browser controls for pause/scrub/volume once it's running.
+  const filmVideo = document.getElementById('film-video');
+  const filmPlayBtn = document.getElementById('film-play-btn');
+  if (filmVideo && filmPlayBtn) {
+    filmPlayBtn.addEventListener('click', () => {
+      filmVideo.controls = true;
+      filmVideo.play();
+      filmPlayBtn.classList.add('is-hidden');
+    });
+  }
+
+  // Reveal on scroll
+  const reveals = document.querySelectorAll('.reveal');
+  const revealObserver = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if (e.isIntersecting) {
+        e.target.classList.add('visible');
+        revealObserver.unobserve(e.target);
+      }
+    });
+  }, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
+  reveals.forEach(el => revealObserver.observe(el));
+</script>
+</body>
+</html>
